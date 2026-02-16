@@ -1,0 +1,19 @@
+*{
+  background-color: black;
+  overflow: hidden;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+
+}
+
+canvas {
+
+  display: block;
+  float: right;
+    background-color: 0;
+}
+
+

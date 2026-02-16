@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" type="image/x-icon" href="beatcha.ico" />
+    <link rel="stylesheet" href="main.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="components/toggleDarkMode.js"></script>
+    <script src="components/toggleExperimentalMode.js"></script>
+    <script src="components/rand-interest.js"></script>
+    <script src="components/copyToClipboard.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=IBM Plex Mono"
+      rel="stylesheet"
+    />
+    <title>beatcha</title>
+  </head>
+  <body>
+    <div id="header">
+      <div class="indexTitle">beatcha</div>
+      <div class="links">
+        <a class="nav" href="Cache">cache</a>
+        <!-- <a class="nav" href="https://university.beachatel.studio/">University.</a> -->
+      </div>
+      <div class="socials">
+        <a class="handles" href="https://www.instagram.com/beatcha0/">
+          ○instagram
+        </a>
+        <a class="handles" href="https://github.com/beachatel"> ○github</a>
+        <button
+          id="copyToClipboard"
+          onclick="(writeClipboardText(), onClick())"
+        >
+          <a class="email"> ○ hello@beatcha.studio</a>
+        </button>
+        <a id="copied">copied!</a>
+
+        <button id="darkModeToggle" onclick="toggleDarkMode()"></button>
+        <!-- <button
+          id="experimentalModeToggle"
+          onclick="toggleExperimentalMode()"
+        ></button> -->
+      </div>
+      <div id="about">
+        Creative computing student with a passion for programming, web
+        development and digital media. Interested in user experience and
+        accessible web design. Experienced in using content management systems
+        like WordPress and writing HTML, CSS and JavaScript for frontend
+        development. Good at working across local and cloud based storage
+        systems, well versed in GitHub and version control. Interested in _
+        <span id="output"></span>
+      </div>
+    </div>
+    <div class="projects-container">
+      <div class="projects">
+        <ins> Interactive Tools</ins>
+        ○
+        <br />
+        <a href="Projects/Interactive-Tools/Super-Formula-Sub-Divider/"
+          >SuperFormulaSubdivider
+        </a>
+        <br />
+        <a href="Projects/Interactive-Tools/Gradienter/">Gradienter</a>
+        <br />
+        <a href="Projects/Interactive-Tools/Ascii-Motion/">AsciiMotion</a>
+        <br />
+        <a href="Projects/Interactive-Tools/Aizawa-Attractor-Visualiser/"
+          >Aizawa Attractor Visualiser
+        </a>
+        <br />
+        <a
+          href="Projects/Interactive-Tools/Hand-Tracking-Point-Cloud-Destruction/"
+          >Hand Tracking Point Cloud Destruction
+        </a>
+        <br />
+        <a href="Projects/Interactive-Tools/Hand-Tracking-Ascii-Noise/"
+          >Hand Tracking Ascii Noise
+        </a>
+        <br />
+      </div>
+      <div class="projects">
+        <ins> Visual Programming</ins>
+        ○
+        <br />
+        <a class="thumbnail" href="Projects/Visual-Programming/John-Glacier-VJ/"
+          >John Glacier
+        </a>
+        <br />
+        <a class="thumbnail" href="Projects/Visual-Programming/Cobalt-Studios/"
+          >Cobalt Studios
+        </a>
+        <br />
+      </div>
+      <div class="projects">
+        <ins> Motion</ins>
+        ○
+        <br />
+        <a class="thumbnail" href="Projects/Motion/John-Glacier-Motion/"
+          >John Glacier
+        </a>
+        <br />
+        <a class="thumbnail" href="Projects/Motion/Shopayado/">Shopayado</a>
+        <br />
+        <a class="thumbnail" href="Projects/Motion/Balance-NCL/">Balance NCL</a>
+      </div>
+      <div class="projects">
+        <div class="type"><ins> Installation</ins> ○</div>
+        <a class="thumbnail" href="Projects/Installation/Nova/"
+          >Nova @ Salford Lightwaves
+        </a>
+      </div>
+    </div>
+  </body>
+  <div class="footer">
+    <p>© 2026 Bea Chatel</p>
+  </div>
+</html>

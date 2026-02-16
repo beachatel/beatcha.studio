@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="style.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyon Illustration Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #000000;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .grid-container img,
+        .grid-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .grid-container video {
+            pointer-events: none;
+            /* Prevent interaction with videos */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid-container">
+        <img src="https://res.cloudinary.com/din8rv70n/image/upload/v1742741271/frames_frame-00003_yurcgh.png"
+            alt="Image 2">
+        <video src="https://res.cloudinary.com/din8rv70n/video/upload/v1742741318/square_yvtjg1.mp4" autoplay
+            loop></video><img
+            src="https://res.cloudinary.com/din8rv70n/image/upload/v1742741271/frames_frame-00003_yurcgh.png"
+            alt="Image 2">
+        <video src="https://res.cloudinary.com/din8rv70n/video/upload/v1742741317/30_grid_n5ca69.mp4" autoplay <video
+            src="https://res.cloudinary.com/din8rv70n/video/upload/v1742741301/90_grid_xwdygb.mp4" autoplay
+            loop></video>
+        <video src="https://res.cloudinary.com/din8rv70n/video/upload/v1742741279/170_grid_ufwbim.mp4" autoplay
+            loop></video>
+        <img src="https://res.cloudinary.com/din8rv70n/image/upload/v1742741272/lyon_kiafd8.png" alt="Image 1">
+
+        <img src="https://res.cloudinary.com/din8rv70n/image/upload/v1742741270/frames_frame-00003_10.57.49_mqz9po.png"
+            alt="Image 3">
+    </div>
+</body>
+
+</html>
