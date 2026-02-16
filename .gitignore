@@ -1,0 +1,17 @@
+*./img/
+
+*.png
+
+*.jpg
+*.jpeg
+*.JPG
+*.mp3
+*.mp4
+
+*.vscode
+
+*All_Projects/
+*/Users/bea/Documents/Personal/Code Projects/beachatel.studio/Projects/Ian-Pooley-Interstellar-Strut-Visualiser/Data/
+*Process/
+*img/
+*Fonts/
