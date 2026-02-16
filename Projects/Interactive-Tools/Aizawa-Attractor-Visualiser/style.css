@@ -1,0 +1,24 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  font-family: monospace;
+}
+
+canvas {
+  display: block;
+  float: right;
+}
+
+#description {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 20px;
+  z-index: 10;
+  width: 10%;
+
+}
+
+
+   

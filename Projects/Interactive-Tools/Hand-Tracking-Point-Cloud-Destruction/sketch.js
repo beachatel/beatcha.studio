@@ -1,6 +1,3 @@
-let capture;
-let facingUser = true;
-
 let model3D;
 let program;
 let renderer;
@@ -21,55 +18,14 @@ let colors = [];
 let randoms = [];
 
 let ready = false;
-let dissolve = 1000; // smoothed dissolve value
-
-function isMobileDevice() {
-  // 1. Modern Chromium browsers
-  if (
-    navigator.userAgentData &&
-    typeof navigator.userAgentData.mobile === "boolean"
-  ) {
-    return navigator.userAgentData.mobile;
-  }
-
-  // 2. Touch support + small screen
-  const hasTouch = navigator.maxTouchPoints > 0;
-  const smallScreen = window.matchMedia("(max-width: 768px)").matches;
-
-  // 3. Coarse pointer (phones & most tablets)
-  const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
-
-  return (hasTouch && smallScreen) || coarsePointer;
-}
-
-function setupCamera() {
-  if (video) {
-    video.remove();
-  }
-
-  const isMobile = isMobileDevice();
-
-  const constraints = {
-    audio: false,
-    video: isMobile
-      ? {
-          facingMode: (facingUser = "user"), // flexible
-        }
-      : true, // desktop just uses default webcam
-  };
-
-  video = createCapture(constraints, () => {
-    console.log("Camera ready");
-  });
-
-  video.size(width, height);
-  video.hide();
-}
+let dissolve = 0; // smoothed dissolve value
 
 function setup() {
-  renderer = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
+  renderer = createCanvas(windowWidth, windowHeight, WEBGL);
 
-  // setupCamera(); // instead of createCapture here
+  video = createCapture(VIDEO);
+  video.size(640, 480);
+  video.hide();
 
   handPose = ml5.handPose(video, () => {
     handPose.detectStart(video, (results) => {
@@ -81,6 +37,7 @@ function setup() {
     model3D = m;
     const gl = drawingContext;
 
+    // ===== VERTEX SHADER =====
     const vert = `
     attribute vec3 aPosition;
     attribute vec3 aColor;
@@ -90,7 +47,6 @@ function setup() {
     uniform mat4 uProjectionMatrix;
     uniform float uTime;
     uniform float uProgress;
-    
 
     varying vec3 vColor;
 
@@ -98,24 +54,25 @@ function setup() {
       vec3 pos = aPosition;
 
       if (uProgress > 0.0) {
-        pos.y -= uProgress * 10.0;
-        pos += aRandom * uProgress * 1000.0;
-        pos.x += sin(uTime + pos.y * 0.1) * (uProgress * 10.0);
+        pos.y -= uProgress * 100.0;
+        pos += aRandom * uProgress * 100.0;
+        pos.x += sin(uTime + pos.y * 0.1) * (uProgress * 20.0);
       }
 
       gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(pos, 1.0);
-      gl_PointSize = 2.0;
+      gl_PointSize = 1.5;
       vColor = aColor;
     }
     `;
 
+    // ===== FRAGMENT SHADER =====
     const frag = `
     precision highp float;
     varying vec3 vColor;
 
     void main() {
       vec2 c = gl_PointCoord - 0.5;
-      if (length(c) > 0.4) discard;
+      if (length(c) > 0.3) discard;
       gl_FragColor = vec4(vColor, 1.0);
     }
     `;
@@ -151,7 +108,7 @@ function setup() {
       randoms.push(random(-1, 1), random(-1, 1), random(-1, 1));
 
       const t = map(v.y, yMin, yMax, 0, 1);
-      colors.push(lerp(0.2, 1.0, t), lerp(0.4, 0.8, t), lerp(9.0, 0.1, t));
+      colors.push(lerp(0.2, 1.0, t), lerp(0.4, 0.8, t), lerp(1.0, 0.3, t));
     }
 
     program.positionBuffer = createVBO(gl, vertices);
