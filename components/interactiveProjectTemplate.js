@@ -1,3 +1,5 @@
+import { Pane } from "tweakpane";
+
 // Create a fixed UI container on left of the screen
 // Figure out styling for mobile
 export function createUi() {

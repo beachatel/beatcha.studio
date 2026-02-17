@@ -1,4 +1,4 @@
-// import { createUi } from "../../../components/interactiveProjectTemplate";
+import { createUi } from "../../../components/interactiveProjectTemplate";
 
 let gridSize = 50;
 let colorPicker = 50;
