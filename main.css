@@ -88,11 +88,11 @@ a#copied {
   border-bottom-left-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
   font-size: 0.8em;
+  height: 5vh;
 }
 
 #output {
-  background-color: rgb(3, 4, 5);
-  color: rgb(242, 242, 242);
+  color: rgb(0, 30, 255);
 }
 
 .projects-container {
@@ -138,8 +138,7 @@ body.dark-mode .socials .about {
 }
 
 body.dark-mode #output {
-  background-color: rgb(242, 242, 242);
-  color: rgb(3, 4, 5);
+  color: rgb(255, 0, 162);
 }
 body.dark-mode .socials svg {
   fill: rgb(242, 242, 242);
