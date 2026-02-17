@@ -1,4 +1,4 @@
-import { Pane } from "../../../node_modules/tweakpane";
+// import { createUi } from "../../../components/interactiveProjectTemplate";
 
 let gridSize = 50;
 let colorPicker = 50;
@@ -12,24 +12,25 @@ let noiseFrom, noiseTo;
 let r1, r2, r3, r4;
 let r;
 
+let tanCheckBox,
+  sinCheckBox,
+  check1,
+  check2,
+  check3,
+  check4,
+  rectCheckBox,
+  rectSinCheckBox;
+let translateSlider, gridSizeSlider, gridSizeMultSlider;
+let tanEllipseAnimation, sinEllipseAnimation;
+let bgColorPicker;
+let saveImageButton;
+let colorInputs = [];
+
 function setup() {
   createCanvas(windowWidth / 1.25, windowHeight);
+  createUi();
 
-  let tanCheckBox,
-    sinCheckBox,
-    check1,
-    check2,
-    check3,
-    check4,
-    rectCheckBox,
-    rectSinCheckBox;
-  let translateSlider, gridSizeSlider, gridSizeMultSlider;
-  let tanEllipseAnimation, sinEllipseAnimation;
-  let bgColorPicker;
-  let saveImageButton;
-  let colorInputs = [];
-
-  const pane = new Pane();
+  // const pane = new Pane();
 
   translateSlider = createSlider(1, 20, 10, 0.01);
   translateSlider.position(10, 10);
