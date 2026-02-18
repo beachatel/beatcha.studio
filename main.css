@@ -341,3 +341,10 @@ a.thumbnail img {
 a.thumbnail:hover img {
   opacity: 1;
 }
+
+/* Tweakpane default styling to left */
+
+.tp-dfwv {
+  left: 1em;
+  padding-top: 1em;
+}

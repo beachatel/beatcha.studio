@@ -1,3 +1,19 @@
+let params = {
+  colorPick1: "#000000",
+  colorPick2: "#000000",
+  colorPick3: "#000000",
+  sliderai: 1,
+  sliderbi: 1,
+  slidermi: 1,
+  slidern1: 1,
+  slidern2: 1,
+  slidern3: 1,
+  slidervi: 1,
+  sliderti: 1,
+  sliderposXi: 1,
+  sliderposYi: 1,
+};
+
 let squares = [];
 let newGrid = [];
 
@@ -317,4 +333,61 @@ function ui() {
 
   randomiseButton = createButton("Randomise");
   randomiseButton.mousePressed(randomise);
+}
+
+function setupGUI() {
+  pane = new Pane();
+
+  console.log(pane);
+  pane.addBlade({ view: "separator" });
+  pane.addBinding(params, "Translate", { min: 1, max: 20, step: 0.01 });
+  pane.addBinding(params, "GridSize", {
+    min: 10,
+    max: 100,
+    step: 1,
+  });
+  pane.addBinding(params, "GridMult", { min: 1, max: 4, step: 0.1 });
+  pane.addBlade({ view: "separator" });
+  pane.addBinding(params, "Tan");
+  pane.addBinding(params, "Sin");
+  pane.addBinding(params, "TanEllipseAnimation");
+  pane.addBinding(params, "SinEllipseAnimation");
+  pane.addBinding(params, "DisplayRectangles");
+  pane.addBinding(params, "AffectRectanglePosSin");
+
+  pane.addBlade({ view: "separator" });
+
+  pane.addBinding(params, "BackgroundColour");
+  pane.addBinding(params, "ColourPallete");
+  pane.addBinding(params, "ColourPallete1");
+  pane.addBinding(params, "ColourPallete2");
+  pane.addBlade({ view: "separator" });
+
+  // adding a button
+  let button = pane.addButton({
+    title: "ExportImage",
+    label: "", // optional
+  });
+  button.on("click", function saveImage() {
+    save("image.png");
+  });
+
+  pane.addBlade({ view: "separator" });
+
+  pane.addBinding(params, "preset", {
+    options: {
+      None: "",
+      Preset1: "Preset 1",
+      Preset2: "Preset 2",
+      Preset3: "Preset 3",
+    },
+  });
+}
+
+function saveImage() {
+  save("image.png");
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
