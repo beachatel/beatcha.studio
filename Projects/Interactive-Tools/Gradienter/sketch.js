@@ -240,6 +240,7 @@ function setupGUI() {
   pane = new Pane({
     title: "Parameters",
   });
+  pane.element.classList.add("my-pane");
 
   console.log(pane);
   pane.addBlade({ view: "separator" });

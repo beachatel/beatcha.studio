@@ -34,3 +34,9 @@ body {
   --tp-monitor-background-color: hsla(0, 0%, 0%, 0.3);
   --tp-monitor-foreground-color: hsla(0, 0%, 100%, 0.3);
 } */
+
+@media (max-width: 600px) {
+  .my-pane {
+    transform: scale(70%);
+  }
+}
