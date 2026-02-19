@@ -1,23 +1,25 @@
 let params = {
-  colorPick1: "#000000",
-  colorPick2: "#000000",
-  colorPick3: "#000000",
-  sliderai: 1,
-  sliderbi: 1,
-  slidermi: 1,
-  slidern1: 1,
-  slidern2: 1,
-  slidern3: 1,
-  slidervi: 1,
-  sliderti: 1,
-  sliderposXi: 1,
-  sliderposYi: 1,
+  sz: 75,
+  a: 1,
+  b: 1,
+  m: 8,
+  n1: 0.5,
+  n2: 0.5,
+  n3: 8,
+  v: 1,
+  t: 1,
+  xp: 1,
+  yp: 1,
+  fill: "#001001",
+  sfill: "#ff00dd",
+  stroke: "#0077ff",
+  preset: "",
 };
 
 let squares = [];
 let newGrid = [];
 
-let sz = 100;
+let sz = 50;
 let szIncrement = 1; // Ensure this is non-zero to see the animation
 let growing = true;
 let t = 0;
@@ -27,25 +29,10 @@ let updateInterval;
 let fr;
 let display;
 
-let colorPick1, colorPick2, colorPick3;
-let sliderai,
-  sliderbi,
-  slidermi,
-  slidern1i,
-  slidern2i,
-  slidern3i,
-  slidervi,
-  sliderti;
-// let slideraiLabel
-let img;
-let button;
-
 //
 
 function setup() {
-  createCanvas(windowWidth - windowWidth / 5, windowHeight - windowHeight / 9);
-
-  ui();
+  createCanvas(windowWidth, windowHeight);
 
   // Initialize DisplayGrid
   display = new DisplayGrid();
@@ -53,22 +40,26 @@ function setup() {
   // Populate the initial squares grid
   populateGrid();
   lastUpdateTime = millis(); // Initialize the last update time
+  setupGUI();
 }
 
 function draw() {
-  let str = colorPick1.color(); //Total Stroke color
-  let overlay = colorPick3.color(); //fill color?
-  let secondary = colorPick2.color(); //Minority square color
+  background(0);
+  pane.refresh(); // update the information in the GUI
+  console.log(sz);
+
+  // let str = colorPick1.color(); //Total Stroke color
+  // let overlay = colorPick3.color(); //fill color?
+  // let secondary = colorPick2.color(); //Minority square color
 
   // let speed = slider1.value();
   // let fr = slider2.value();
   // let x = slider3.value();
 
   // slideraiLabel.html('Slider Value: ' + slider.value());
-  background(20);
-  stroke(str);
+  stroke(params.stroke);
 
-  fill(overlay);
+  fill(params.fill);
 
   let currentTime = millis();
 
@@ -86,24 +77,19 @@ function draw() {
     //     growing = true;
     //   }
     // }
-
     populateGrid();
   }
 
   display.grid();
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
-
 function populateGrid() {
   squares = [];
   newGrid = [];
 
-  for (let x = 0; x < width; x += sz) {
-    for (let y = 0; y < height; y += sz) {
-      squares.push(new GridSquare(x, y, sz, sz));
+  for (let x = 0; x < width; x += params.sz) {
+    for (let y = 0; y < height; y += params.sz) {
+      squares.push(new GridSquare(x, y, params.sz, params.sz));
     }
   }
 
@@ -126,12 +112,14 @@ class GridSquare {
 
   display() {
     // Display the Superformula within this grid square
+
     rect(this.x, this.y, this.w, this.h); // Draw the rectangle outline
     this.superForm.display();
 
     // Draw second-level subdivisions
     for (let sub of this.subSquares) {
       push();
+
       // fill(255, 0, 9, 50);
       rect(sub.x, sub.y, sub.w, sub.h);
       pop();
@@ -143,11 +131,17 @@ class GridSquare {
   subDiv(sqr) {
     // First level of subdivision
     if (random(1) > 0.25) {
-      let sz = sqr.w / 2;
-      let s1 = new GridSquare(this.x, this.y, sz, sz);
-      let s2 = new GridSquare(this.x + sz, this.y, sz, sz);
-      let s3 = new GridSquare(this.x, this.y + sz, sz, sz);
-      let s4 = new GridSquare(this.x + sz, this.y + sz, sz, sz);
+      params.sz = sqr.w / 2;
+
+      let s1 = new GridSquare(this.x, this.y, params.sz, params.sz);
+      let s2 = new GridSquare(this.x + params.sz, this.y, params.sz, params.sz);
+      let s3 = new GridSquare(this.x, this.y + params.sz, params.sz, params.sz);
+      let s4 = new GridSquare(
+        this.x + params.sz,
+        this.y + params.sz,
+        params.sz,
+        params.sz,
+      );
 
       // Add first level subdivisions to the subSquares array
       this.subSquares.push(s1);
@@ -192,10 +186,6 @@ class GridSquare {
 //new grid tab
 
 class DisplayGrid {
-  constructor() {
-    // Constructor can remain empty or be omitted if no initialization is needed
-  }
-
   grid() {
     // Display squares from the newGrid array
     for (let i = 0; i < newGrid.length; i++) {
@@ -213,163 +203,124 @@ class SuperForm {
     this.y = yTemp;
     this.w = wTemp;
     this.h = hTemp;
-    this.t = 0;
   }
 
   display() {
     // Update the slider values dynamically inside the display method
-    let ai = sliderai.value();
-    let bi = sliderbi.value();
-    let mi = slidermi.value();
-    let n1i = slidern1i.value();
-    let n2i = slidern2i.value();
-    let n3i = slidern3i.value();
-    let vi = slidervi.value();
-    let ti = sliderti.value();
-    let posXi = sliderposXi.value();
-    let posYi = sliderposYi.value();
+
+    // let ai = params.a;
+    // let bi = params.b;
+    // let mi = params.m;
+    // let n1i = params.n1;
+    // let n2i = params.n2;
+    // let n3i = params.n3;
+    // let vi = params.v;
+    // let ti = params.t;
+    // let posXi = params.xp;
+    // let posYi = params.yp;
+    push();
+    fill(params.sfill);
 
     beginShape();
+
     // Add interactive variables a, b, m, n1, n2, n3 to the shape
-    for (let theta = ti; theta <= TWO_PI; theta += vi) {
-      let radius = this.r(theta, sin(this.t) + ai, bi, mi, n1i, n2i, n3i);
+    for (let theta = params.t; theta <= TWO_PI; theta += params.v) {
+      // let c = [
+      //   2, // a size /bottom of the shape/ one half of the spikes in m
+      //   2, // b    top of the shape or one half of the spikes
+      //   8, // m amount of rotation semetrie spikes 1 spiral 2 teardrop more spikes
+      //   1, // n1 larger amount smooths out form of inner spikes
+      //   cos(t), // n2 form from one side od the spikes
+      //   sin(t), // n3 form from one side od the spikes
+      // ];
+      let radius = r(
+        theta,
+        params.a,
+        params.b,
+        params.m,
+        params.n1,
+        params.n2 + cos(t),
+        params.n3 + cos(t),
+      );
 
       // Map radius to fit within the grid square
-      let maxRadius = max(this.w, this.h) / 10; // Max radius to fit within the smallest dimension
+      let maxRadius = max(this.w, this.h) / 4; // Max radius to fit within the smallest dimension
       let adjustedRadius = radius * maxRadius;
 
       // Calculate the x and y positions relative to the center of the grid square
-      let posX = this.x + this.w / 2 + adjustedRadius * cos(theta * posXi);
-      let posY = this.y + this.h / 2 + adjustedRadius * sin(theta * posYi);
+      let posX = this.x + this.w / 2 + adjustedRadius * cos(theta * params.xp);
+      let posY = this.y + this.h / 2 + adjustedRadius * sin(theta * params.yp);
 
       // Draw the vertex for the shape
+
       vertex(posX, posY);
     }
 
     endShape(CLOSE);
     this.t += 0.03; // Increment time for animation
-  }
-
-  r(theta, a, b, m, n1, n2, n3) {
-    let cosPart = pow(abs(cos((m * theta) / 4.0) / a), n2);
-    let sinPart = pow(abs(sin((m * theta) / 4.0) / b), n3);
-
-    return pow(cosPart + sinPart, -1.0 / n1);
+    pop();
   }
 }
 
+function r(theta, a, b, m, n1, n2, n3) {
+  // let cosPart = pow(abs(cos((m * theta) / 4.0) / a), n2);
+  // let sinPart = pow(abs(sin((m * theta) / 4.0) / b), n3);
+
+  // return pow(cosPart + sinPart, -1.0 / n1);
+  return pow(
+    pow(abs(cos((m * theta) / 4.0) / a), n2) +
+      pow(abs(sin((m * theta) / 4.0) / b), n3),
+    -1.0 / n1,
+  );
+}
+
 function saveImage() {
-  save("custom.jpg");
+  saveCanvas("custom.jpg");
 }
 
 function randomise() {}
 
-function ui() {
-  // interactivity sliders and color picker
-
-  colorPick1 = createColorPicker("deeppink");
-  colorPick1.position(windowWidth - windowWidth / 6, windowHeight / 6);
-
-  colorPick2 = createColorPicker("rgb(110, 231, 144)");
-  colorPick2.position(windowWidth - windowWidth / 6, windowHeight / 4);
-
-  colorPick3 = createColorPicker("rgb(82, 26, 225)");
-  colorPick3.position(windowWidth - windowWidth / 6, windowHeight / 3);
-
-  //intenisty
-  sliderai = createSlider(0, 5, 0.1, 0.2);
-  sliderai.position(windowWidth - windowWidth / 6, 300);
-  sliderai.size(200);
-  let slideraiLabel = createDiv(`A: ${sliderai.value()}`);
-  slideraiLabel.position(windowWidth - windowWidth / 6, 330);
-  slideraiLabel.style("color", "black");
-  sliderai.input(() => slideraiLabel.html(`A: ${sliderai.value()}`));
-
-  sliderbi = createSlider(0.1, 1, 0.1, 0.1);
-  sliderbi.position(windowWidth - windowWidth / 6, 350);
-  sliderbi.size(200);
-  let sliderbiLabel = createDiv(`B: ${sliderbi.value()}`);
-  sliderbiLabel.position(windowWidth - windowWidth / 6, 380);
-  sliderbiLabel.style("color", "black");
-  sliderbi.input(() => sliderbiLabel.html(`B: ${sliderbi.value()}`));
-
-  slidermi = createSlider(0, 2, 0.1, 0.1);
-  slidermi.position(windowWidth - windowWidth / 6, 400);
-  slidermi.size(200);
-
-  slidern1i = createSlider(0, 10);
-  slidern1i.position(windowWidth - windowWidth / 6, 450);
-  slidern1i.size(200);
-
-  slidern2i = createSlider(0, 10);
-  slidern2i.position(windowWidth - windowWidth / 6, 500);
-  slidern2i.size(200);
-
-  //scale
-  slidern3i = createSlider(0, 10);
-  slidern3i.position(windowWidth - windowWidth / 6, 550);
-  slidern3i.size(200);
-
-  //theta times by variable
-  slidervi = createSlider(0.1, 1, 0.1, 0.1);
-  slidervi.position(windowWidth - windowWidth / 6, 600);
-  slidervi.size(200);
-
-  //theta interaction
-  sliderti = createSlider(0, 5, 0.1, 0.1);
-  sliderti.position(windowWidth - windowWidth / 6, 650);
-  sliderti.size(200);
-
-  sliderposXi = createSlider(0, 100, 1, 0.1);
-  sliderposXi.position(windowWidth - windowWidth / 6, 700);
-  sliderposXi.size(200);
-
-  sliderposYi = createSlider(0, 100, 1, 0.1);
-  sliderposYi.position(windowWidth - windowWidth / 6, 750);
-  sliderposYi.size(200);
-
-  button = createButton("Save Image");
-  button.mousePressed(saveImage);
-
-  randomiseButton = createButton("Randomise");
-  randomiseButton.mousePressed(randomise);
-}
-
 function setupGUI() {
-  pane = new Pane();
+  pane = new Pane({
+    title: "Parameters",
+  });
 
   console.log(pane);
-  pane.addBlade({ view: "separator" });
-  pane.addBinding(params, "Translate", { min: 1, max: 20, step: 0.01 });
-  pane.addBinding(params, "GridSize", {
-    min: 10,
-    max: 100,
-    step: 1,
-  });
-  pane.addBinding(params, "GridMult", { min: 1, max: 4, step: 0.1 });
-  pane.addBlade({ view: "separator" });
-  pane.addBinding(params, "Tan");
-  pane.addBinding(params, "Sin");
-  pane.addBinding(params, "TanEllipseAnimation");
-  pane.addBinding(params, "SinEllipseAnimation");
-  pane.addBinding(params, "DisplayRectangles");
-  pane.addBinding(params, "AffectRectanglePosSin");
 
   pane.addBlade({ view: "separator" });
+  pane.addBinding(params, "sz", { min: 40, max: 120, step: 1 });
+  pane.addBinding(params, "a", { min: 0.1, max: 0.9, step: 0.01 });
+  pane.addBinding(params, "b", { min: 0.7, max: 1, step: 0.01 });
+  pane.addBinding(params, "m", { min: 0.1, max: 2, step: 0.01 });
+  pane.addBinding(params, "n1", { min: 0.8, max: 4, step: 0.01 });
+  pane.addBinding(params, "n2", { min: 0.1, max: 1, step: 0.01 });
+  pane.addBinding(params, "n3", { min: 1, max: 40, step: 0.1 });
+  pane.addBinding(params, "v", { min: 0.1, max: 0.64, step: 0.001 });
+  pane.addBinding(params, "t", { min: 0.01, max: 3, step: 0.01 });
+  pane.addBinding(params, "xp", { min: 1, max: 40, step: 0.1 });
+  pane.addBinding(params, "yp", { min: 1, max: 40, step: 0.1 });
 
-  pane.addBinding(params, "BackgroundColour");
-  pane.addBinding(params, "ColourPallete");
-  pane.addBinding(params, "ColourPallete1");
-  pane.addBinding(params, "ColourPallete2");
+  pane.addBlade({ view: "separator" });
+  pane.addBinding(params, "fill");
+  pane.addBinding(params, "sfill");
+  pane.addBinding(params, "stroke");
   pane.addBlade({ view: "separator" });
 
   // adding a button
-  let button = pane.addButton({
+  let save = pane.addButton({
     title: "ExportImage",
     label: "", // optional
   });
-  button.on("click", function saveImage() {
-    save("image.png");
+  save.on("click", function saveImage() {
+    saveCanvas("image.png");
+  });
+
+  let randomise = pane.addButton({
+    title: "Randomise",
+    label: "", // optional
+  });
+  randomise.on("click", function saveImage() {
+    saveCanvas("image.png");
   });
 
   pane.addBlade({ view: "separator" });
@@ -382,10 +333,6 @@ function setupGUI() {
       Preset3: "Preset 3",
     },
   });
-}
-
-function saveImage() {
-  save("image.png");
 }
 
 function windowResized() {
