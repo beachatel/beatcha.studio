@@ -1,30 +1,40 @@
-let angle = 0; // Intialising angle as 0
-let cam,font; // Declaring camera and font object
-let points = []; // Array to store the points of the attractor
-let x = 0.1, y = 1, z = 0.01; // Initial conditions
-let a, b, c, d, e, f; // Aizawa parameters
-let showAxis = true; // Boolean to track axis visibility
+let params = {
+  DiscreteTime: 0.01,
+  PointLength: 10000,
+  PointSize: 10,
+  a: 0.95,
+  b: 0.7,
+  c: 0.6,
+  d: 3.5,
+  e: 0.25,
+  f: 0.1,
+  ShowAxis: true,
+};
 
+let angle = 0; // Intialising angle as 0
+let cam, font; // Declaring camera and font object
+let points = []; // Array to store the points of the attractor
+let x = 0.1,
+  y = 1,
+  z = 0.01; // Initial conditions
+let a, b, c, d, e, f; // Aizawa parameters
 
 function setup() {
-  createCanvas(windowWidth / 1.21, windowHeight, WEBGL);
+  createCanvas(windowWidth, windowHeight, WEBGL);
   cam = createCamera();
-  cam.setPosition(200, -4000, 1000);
+  cam.setPosition(-500, -3000, 1000);
   cam.lookAt(0, 0, 0);
 
-  createSliders(); // Call ui.js function
-   
+  setupGUI();
 }
 
 function draw() {
-  background(0,0,255);
+  background(0, 0, 255);
 
   orbitControl(); //3D camera control with mouse
 
-
   // Axis guidelines
-  if (showAxis) {
-
+  if (params.ShowAxis == true) {
     strokeWeight(10); // Changes stroke weight of axis guidelines
 
     stroke(255, 0, 0); // Red for X-axis
@@ -38,51 +48,29 @@ function draw() {
   }
 
   // let dt = 0.01; // Time step
-  let dt = discreteTimeSlider.value(); // Time step
-  let pointSize = pointSizeSlider.value();
-  let pointLength = pointLengthSlider.value();
-
-  // Update Aizawa parameters from sliders
-  let aVal = a.value();
-  let bVal = b.value();
-  let cVal = c.value();
-  let dVal = d.value();
-  let eVal = e.value();
-  let fVal = f.value();
-
-
-  // if mouse pressed trigger clearButton to reset the points array
-  // and start the cords at 0 again
-  clearButton.mousePressed(() => {
-    points = []; // Clear the points array
-    x = 0.1; // Reset initial conditions
-    y = 1;
-    z = 0.01;
-  });
-
 
   noStroke(); // Removes stroke from spheres
   fill(255, 100, 200); // Sphere fill colour
 
   // Aizawa equations
-  let dx = (z - bVal) * x - dVal * y; 
-  let dy = dVal * x + (z - bVal) * y; 
+  let dx = (z - params.b) * x - params.d * y;
+  let dy = params.d * x + (z - params.b) * y;
   let dz =
-    cVal +
-    aVal * z -
+    params.c +
+    params.a * z -
     z ** 3 / 3 -
-    (x ** 2 + y ** 2) * (1 + eVal * z) +
-    fVal * z * x ** 3;
+    (x ** 2 + y ** 2) * (1 + params.e * z) +
+    params.f * z * x ** 3;
 
-  x += dx * dt; // x += discrete x * discrete time
-  y += dy * dt; // y += discrete y * discrete time
-  z += dz * dt; // z += discrete z * discrete time
+  x += dx * params.DiscreteTime; // x += discrete x * discrete time
+  y += dy * params.DiscreteTime; // y += discrete y * discrete time
+  z += dz * params.DiscreteTime; // z += discrete z * discrete time
 
   // Scale the point for better visualization and add it to the array
   points.push(createVector(x * 1000, y * 1000, z * 1000));
 
   // Limit the number of points to avoid performance issues
-  if (points.length > pointLength) {
+  if (points.length > params.PointLength) {
     points.shift();
   }
 
@@ -90,13 +78,45 @@ function draw() {
   for (let p of points) {
     push();
     translate(p.x, p.y, p.z);
-    sphere(pointSize); // Small spheres for each point
-    pop(); 
+    sphere(params.PointSize); // Small spheres for each point
+    pop();
   }
 }
 
+function setupGUI() {
+  const pane = new Pane({
+    title: "Parameters",
+  });
 
+  pane.addBlade({ view: "separator" });
+  pane.addBinding(params, "DiscreteTime", {
+    min: 0.001,
+    max: 0.05,
+    step: 0.01,
+  });
+  pane.addBinding(params, "PointSize", { min: 1, max: 40, step: 0.1 });
+  pane.addBinding(params, "PointLength", { min: 100, max: 50000, step: 10 });
+  pane.addBlade({ view: "separator" });
+  pane.addBinding(params, "a", { min: 0.5, max: 1.5, step: 0.01 });
+  pane.addBinding(params, "b", { min: 0.5, max: 1, step: 0.01 });
+  pane.addBinding(params, "c", { min: 0.5, max: 1, step: 0.01 });
+  pane.addBinding(params, "d", { min: 2, max: 5, step: 0.1 });
+  pane.addBinding(params, "e", { min: 0.1, max: 0.5, step: 0.01 });
+  pane.addBinding(params, "f", { min: 0.05, max: 0.2, step: 0.01 });
 
+  pane.addBlade({ view: "separator" });
 
+  let cc = pane.addButton({
+    title: "Clear Canvas",
+  });
+  cc.on("click", function () {
+    points = []; // Clear the points array
+    x = 0.1; // Reset initial conditions
+    y = 1;
+    z = 0.01;
+  });
 
+  pane.addBlade({ view: "separator" });
 
+  pane.addBinding(params, "ShowAxis");
+}

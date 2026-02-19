@@ -7,21 +7,26 @@ let noiseFrom, noiseTo;
 let r1, r2, r3, r4;
 let r;
 let pane;
-
+// 20 , 22 ,1.56
 let params = {
-  Translate: 10,
-  GridSize: 50,
-  GridMult: 2,
+  Translate: 20,
+  GridSize: 22,
+  GridMult: 1.5,
   Tan: true,
-  Sin: false,
+  Sin: true,
   TanEllipseAnimation: false,
   SinEllipseAnimation: false,
   DisplayRectangles: false,
   AffectRectanglePosSin: false,
-  BackgroundColour: "#000000",
-  ColourPallete: "#FFFFFF",
-  ColourPallete1: "#FFFFFF",
-  ColourPallete2: "#FFFFFF",
+  BackgroundColour: "#9f778f",
+  ColourPallete: "#ff003e",
+  ColourPallete1: "#3434ff",
+  ColourPallete2: "#ff00c3",
+  Gradient: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+  GradientLinear: true,
+  GradientRadial: false,
+  GradientConic: false,
+
   preset: "",
 };
 
@@ -86,9 +91,43 @@ function draw() {
 
       translate(x / params.Translate, y / params.Translate);
 
-      stroke(interC);
-      strokeWeight((r1 * params.GridSize) / 4);
-      fill(255, 0, 0);
+      if (params.GradientRadial == true) {
+        fillGradient("radial", {
+          from: [params.Gradient.x, params.Gradient.y, width / 4], // x, y : Coordinates
+          to: [params.Gradient.x / 2, params.Gradient.y / 2, height / 4], // x, y : Coordinates
+          steps: [
+            color(params.ColourPallete),
+            color(params.ColourPallete1),
+            color(params.ColourPallete2),
+          ], // Array of p5.color objects or arrays containing [p5.color Object, Color Stop (0 to 1)]
+        });
+      }
+
+      if (params.GradientLinear == true) {
+        fillGradient("linear", {
+          from: [params.Gradient.x, params.Gradient.y], // x, y : Coordinates
+          to: [params.Gradient.x / 2, params.Gradient.y], // x, y : Coordinates
+          steps: [
+            color(params.ColourPallete),
+            color(params.ColourPallete1),
+            color(params.ColourPallete2),
+          ], // Array of p5.color objects or arrays containing [p5.color Object, Color Stop (0 to 1)]
+        });
+      }
+
+      if (params.GradientConic == true) {
+        fillGradient("conic", {
+          from: [params.Gradient.x, params.Gradient.y, width / 4], // x, y, angle(degrees)
+          steps: [
+            color(params.ColourPallete),
+            color(params.ColourPallete1),
+            color(params.ColourPallete2),
+          ], // Array of p5.color objects or arrays containing [p5.color Object, Color Stop (0 to 1)]
+        });
+      }
+      // stroke(interC);
+      // strokeWeight((r1 * params.GridSize) / 4);
+      // fill(interC);
 
       if (params.DisplayRectangles == true) {
         rect(x, y, params.GridSize * r1, params.GridSize * r1);
@@ -105,7 +144,7 @@ function draw() {
       }
 
       noStroke();
-      fill(params.ColourPallete);
+      // fill(interC);
 
       if (params.Tan == true) {
         ellipse(
@@ -177,10 +216,10 @@ function draw() {
 
       // check boxes
 
-      fill(interC);
+      // fill(interC);
       //  ellipse(x * sin (2), y * sin(2), params.params.GridSize / 2.5, params.params.GridSize / 2.5);
 
-      stroke(interD);
+      // stroke(interC);
       strokeWeight(2);
       // line(x, y * 2, x, y, x, y);
       // line(x, y, x * 2, y, x, y);
@@ -198,11 +237,13 @@ function windowResized() {
 }
 
 function setupGUI() {
-  pane = new Pane();
+  pane = new Pane({
+    title: "Parameters",
+  });
 
   console.log(pane);
   pane.addBlade({ view: "separator" });
-  pane.addBinding(params, "Translate", { min: 1, max: 20, step: 0.01 });
+  pane.addBinding(params, "Translate", { min: 1, max: 10, step: 0.01 });
   pane.addBinding(params, "GridSize", {
     min: 10,
     max: 100,
@@ -223,6 +264,21 @@ function setupGUI() {
   pane.addBinding(params, "ColourPallete");
   pane.addBinding(params, "ColourPallete1");
   pane.addBinding(params, "ColourPallete2");
+  pane.addBlade({ view: "separator" });
+
+  pane.addBinding(params, "Gradient", {
+    picker: "inline",
+    expanded: true,
+    x: { min: 100, max: window.innerWidth },
+    y: { min: 100, max: window.innerHeight },
+  });
+
+  pane.addBlade({ view: "separator" });
+
+  pane.addBinding(params, "GradientLinear");
+  pane.addBinding(params, "GradientRadial");
+  pane.addBinding(params, "GradientConic");
+
   pane.addBlade({ view: "separator" });
 
   // adding a button

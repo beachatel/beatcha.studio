@@ -4,6 +4,12 @@
     <link rel="shortcut icon" type="image/x-icon" href="/beatcha.ico" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module">
+      // import the library as a module
+      import { Pane } from "https://cdn.jsdelivr.net/npm/tweakpane@4.0.5/dist/tweakpane.min.js";
+      // then, add it to the "browser" so that it can be used as "global."
+      window.Pane = Pane;
+    </script>
 
     <title>Aizawa Attractor</title>
 
@@ -19,10 +25,10 @@
 
   <body>
     <div id="description">
-      Interactive Visualisation of the Aizawa Attractor built in p5.js.
+      Interactive visualisation of the Aizawa Attractor built in p5.js.
     </div>
 
     <script src="sketch.js"></script>
-    <script src="ui.js"></script>
+    <!-- <script src="ui.js"></script> -->
   </body>
 </html>

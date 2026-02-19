@@ -1,24 +1,33 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   background-color: rgba(0, 0, 0, 0);
   font-family: monospace;
 }
 
-canvas {
-  display: block;
-  float: right;
-}
-
 #description {
   position: absolute;
-  top: 0;
-  left: 0;
+  font-size: 1vw;
+  bottom: 0;
+  right: 0;
+  padding: 0.5em;
   margin: 20px;
   z-index: 10;
   width: 10%;
-
+  background-color: rgb(3, 3, 222);
+  color: rgb(237, 110, 196);
+  border-radius: 1.25em;
 }
 
+.tp-dfwv {
+  z-index: 10000;
+  pointer-events: all;
+}
 
-   
+@media (max-width: 800px) {
+  #description {
+    width: 20vw;
+    font-size: 2vw;
+  }
+}
