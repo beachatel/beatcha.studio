@@ -38,5 +38,7 @@ body {
 @media (max-width: 600px) {
   .my-pane {
     transform: scale(70%);
+    margin-right: -10%;
+    margin-top: -35%;
   }
 }
