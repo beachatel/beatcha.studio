@@ -28,6 +28,11 @@ function setup() {
 
 function draw() {
   background(params.background);
+  pane.refresh();
+
+  document.addEventListener("gesturestart", function (e) {
+    e.preventDefault();
+  });
 
   if (needsRebuild) {
     populateGrid();
@@ -266,4 +271,5 @@ function setupGUI() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   needsRebuild = true;
+  pane.refresh();
 }

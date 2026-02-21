@@ -31,3 +31,25 @@ body {
     font-size: 2vw;
   }
 }
+
+@media (max-width: 600px) {
+  .my-pane {
+    transform: scale(70%);
+  }
+  .tp-dfwv {
+    overflow: visible;
+    margin-right: -10%;
+    margin-top: -15%;
+  }
+}
+
+@media (max-width: 1120px) {
+  .my-pane {
+    transform: scale(70%);
+  }
+  .tp-dfwv {
+    overflow: visible;
+    margin-right: -10%;
+    margin-top: -11%;
+  }
+}

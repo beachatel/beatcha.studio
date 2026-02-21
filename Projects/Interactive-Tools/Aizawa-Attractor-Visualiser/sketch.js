@@ -20,7 +20,7 @@ let x = 0.1,
 let a, b, c, d, e, f; // Aizawa parameters
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL);
+  createCanvas(window.innerWidth, window.innerHeight, WEBGL);
   cam = createCamera();
   cam.setPosition(-500, -3000, 1000);
   cam.lookAt(0, 0, 0);
@@ -30,6 +30,9 @@ function setup() {
 
 function draw() {
   background(0, 0, 255);
+  document.addEventListener("gesturestart", function (e) {
+    e.preventDefault();
+  });
 
   orbitControl(); //3D camera control with mouse
 
@@ -83,10 +86,16 @@ function draw() {
   }
 }
 
+function windowResized() {
+  resizeCanvas(window.innerWidth, window.innerHeight);
+  pane.refresh();
+}
+
 function setupGUI() {
   const pane = new Pane({
     title: "Parameters",
   });
+  pane.element.classList.add("my-pane");
 
   pane.addBlade({ view: "separator" });
   pane.addBinding(params, "DiscreteTime", {

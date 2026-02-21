@@ -41,6 +41,9 @@ function setup() {
 
 function draw() {
   pane.refresh(); // update the information in the GUI
+  document.addEventListener("gesturestart", function (e) {
+    e.preventDefault();
+  });
 
   // let params.GridSize = params.GridSizeSlider.value();
   // let s2 = params.GridSizeMultSlider.value();
@@ -242,7 +245,6 @@ function setupGUI() {
   });
   pane.element.classList.add("my-pane");
 
-  console.log(pane);
   pane.addBlade({ view: "separator" });
   pane.addBinding(params, "Translate", { min: 1, max: 10, step: 0.01 });
   pane.addBinding(params, "GridSize", {

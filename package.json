@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "blueimp-load-image": "^5.16.0",
     "p5.fillgradient": "^0.2.0",
     "tweakpane": "^4.0.5"
   }
