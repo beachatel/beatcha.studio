@@ -149,7 +149,7 @@ function randomiseParams() {
     n1: random(0.2, 5),
     n2: random(0.2, 5),
     n3: random(0.2, 5),
-    v: random(0.02, 0.15),
+    v: random(0.001, 0.05),
     sz: floor(random(50, 120)),
     background: color(random(255), random(255), random(255)).toString(),
     stroke: color(random(255), random(255), random(255)).toString(),
