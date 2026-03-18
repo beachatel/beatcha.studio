@@ -1,16 +1,14 @@
 export function wpMediaLoader() {
   const API =
-    "https://beatchacachewp5924.live-website.com/wp-json/wp/v2/posts?_embed&per_page=20";
+    "https://beatcha0926.live-website.com/wp-json/wp/v2/posts?_embed&per_page=100";
 
   const grid = document.getElementById("grid");
 
-  // Fetch
   fetch(API)
     .then((r) => {
       return r.json();
     })
     .then((posts) => {
-      // Create 6 columns
       const cols = Array.from({ length: 6 }, () => {
         const col = document.createElement("div");
         col.className = "Projects";
