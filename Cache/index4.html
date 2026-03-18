@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cache test</title>
+  <style>
+    body { font-family: monospace; padding: 1em; }
+    #status { margin-bottom: 1em; color: blue; }
+    .grid { columns: 4; column-gap: 0.5em; }
+    .grid img, .grid video {
+      width: 100%; display: block;
+      margin-bottom: 0.5em;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="status">fetching...</div>
+  <div class="grid" id="grid"></div>
+
+  <script>
+    const API = 'https://beatchacachewp5924.live-website.com/wp-json/wp/v2/posts?_embed&per_page=20';
+    const status = document.getElementById('status');
+    const grid   = document.getElementById('grid');
+
+    fetch(API)
+      .then(r => {
+        status.textContent = `HTTP ${r.status}`;
+        return r.json();
+      })
+      .then(posts => {
+        status.textContent = `got ${posts.length} posts`;
+
+        posts.forEach(post => {
+          const media = post._embedded?.['wp:featuredmedia']?.[0];
+          if (!media) return;
+
+          const src      = media.source_url;
+          const mimeType = media.mime_type || '';
+
+          if (mimeType.startsWith('video/')) {
+            const v = document.createElement('video');
+            v.src = src; v.autoplay = true; v.loop = true; v.muted = true; v.playsInline = true;
+            grid.appendChild(v);
+          } else {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = media.alt_text || '';
+            grid.appendChild(img);
+          }
+        });
+      })
+      .catch(err => {
+        status.textContent = 'ERROR: ' + err.message;
+        console.error(err);
+      });
+  </script>
+
+</body>
+</html>
