@@ -2,20 +2,17 @@ function toggleDarkMode() {
   const body = document.body;
   const button = document.getElementById("darkModeToggle");
 
-  // Toggle dark mode class
   body.classList.toggle("dark-mode");
 
-  // Update button text
   if (body.classList.contains("dark-mode")) {
     button.textContent = "toggleLightScreen()";
-    localStorage.setItem("darkMode", "enabled"); // Save preference
+    localStorage.setItem("darkMode", "enabled");
   } else {
     button.textContent = "toggleDarkScreen()";
-    localStorage.setItem("darkMode", "disabled"); // Save preference
+    localStorage.setItem("darkMode", "disabled");
   }
 }
 
-// Check localStorage when the page loads
 document.addEventListener("DOMContentLoaded", function () {
   const body = document.body;
   const button = document.getElementById("darkModeToggle");

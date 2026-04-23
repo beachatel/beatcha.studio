@@ -1,0 +1,115 @@
+{
+  "projects": [
+    {
+      "title": "SuperFormulaSubdivider",
+      "category": "Interactive Tools",
+      "url": "Projects/Interactive-Tools/Super-Formula-Sub-Divider/"
+    },
+    {
+      "title": "Gradienter",
+      "category": "Interactive Tools",
+      "url": "Projects/Interactive-Tools/Gradienter/"
+    },
+    {
+      "title": "Aizawa Attractor Visualiser",
+      "category": "Interactive Tools",
+      "url": "Projects/Interactive-Tools/Aizawa-Attractor-Visualiser/"
+    },
+    {
+      "title": "Hand Tracking Point Cloud",
+      "category": "Interactive Tools",
+      "url": "Projects/Interactive-Tools/Hand-Tracking-Point-Cloud-Destruction/"
+    },
+    {
+      "title": "Hand Tracking Ascii Noise",
+      "category": "Interactive Tools",
+      "url": "Projects/Interactive-Tools/Hand-Tracking-Ascii-Noise/"
+    },
+    {
+      "title": "John Glacier",
+      "category": "Visual Programming",
+      "url": "Projects/Visual-Programming/John-Glacier-VJ/"
+    },
+    {
+      "title": "Cobalt Studios",
+      "category": "Visual Programming",
+      "url": "Projects/Visual-Programming/Cobalt-Studios/"
+    },
+    {
+      "title": "John Glacier",
+      "category": "Motion",
+      "url": "Projects/Motion/John-Glacier-Motion/"
+    },
+    {
+      "title": "Shopayado",
+      "category": "Motion",
+      "url": "Projects/Motion/Shopayado/"
+    },
+    {
+      "title": "Balance NCL",
+      "category": "Motion",
+      "url": "Projects/Motion/Balance-NCL/"
+    },
+    {
+      "title": "Nova @ Salford Lightwaves",
+      "category": "Installation",
+      "url": "Projects/Installation/Nova/"
+    }
+  ],
+  "images": [
+    { "url": "../images/1.png" },
+    { "url": "../images/2.png" },
+    { "url": "../images/3.png" },
+    { "url": "../images/4.png" },
+    { "url": "../images/5.png" },
+    { "url": "../images/6.png" },
+    { "url": "../images/7.png" },
+    { "url": "../images/8.png" },
+    { "url": "../images/9.png" },
+    { "url": "../images/10.png" },
+    { "url": "../images/11.png" },
+    { "url": "../images/12.png" },
+    { "url": "../images/1.png" },
+    { "url": "../images/2.png" },
+    { "url": "../images/3.png" },
+    { "url": "../images/4.png" },
+    { "url": "../images/5.png" },
+    { "url": "../images/6.png" },
+    { "url": "../images/7.png" },
+    { "url": "../images/8.png" },
+    { "url": "../images/9.png" },
+    { "url": "../images/10.png" },
+    { "url": "../images/11.png" },
+    { "url": "../images/12.png" },
+    { "url": "../images/13.png" },
+    { "url": "../images/14.png" },
+    { "url": "../images/15.png" },
+    { "url": "../images/16.png" },
+    { "url": "../images/17.png" },
+    { "url": "../images/18.png" },
+    { "url": "../images/19.png" },
+    { "url": "../images/20.png" },
+    { "url": "../images/21.png" },
+    { "url": "../images/22.png" },
+    { "url": "../images/23.png" },
+    { "url": "../images/24.png" },
+    { "url": "../images/25.png" },
+    { "url": "../images/26.png" },
+    { "url": "../images/27.png" },
+    { "url": "../images/28.png" },
+    { "url": "../images/29.png" },
+    { "url": "../images/30.png" },
+    { "url": "../images/31.png" },
+    { "url": "../images/32.png" },
+    { "url": "../images/33.png" },
+    { "url": "../images/34.png" },
+    { "url": "../images/35.png" },
+    { "url": "../images/36.png" },
+    { "url": "../images/37.png" },
+    { "url": "../images/38.png" },
+    { "url": "../images/39.png" },
+    { "url": "../images/40.png" },
+    { "url": "../images/41.png" },
+    { "url": "../images/42.png" }
+  ]
+}

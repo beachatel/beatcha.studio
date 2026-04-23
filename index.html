@@ -11,11 +11,9 @@
       content="Creative technologist based in Manchester."
     />
     <script src="components/toggleDarkMode.js"></script>
-    <script src="components/toggleExperimentalMode.js"></script>
+    <script type="module" src="components/toggle3D.js"></script>
     <script src="components/rand-interest.js"></script>
     <script src="components/copyToClipboard.js"></script>
-    <script src="components/interactiveProjectTemplate.js"></script>
-    <script src="js/load-image.all.min.js"></script>
     <link
       href="https://fonts.googleapis.com/css?family=IBM Plex Mono"
       rel="stylesheet"
@@ -43,22 +41,21 @@
         <a id="copied">copied!</a>
 
         <button id="darkModeToggle" onclick="toggleDarkMode()"></button>
-        <!-- <button
-          id="experimentalModeToggle"
-          onclick="toggleExperimentalMode()"
-        ></button> -->
+        <button id="ThreeD-Toggle" onclick="toggle3D()">toggle3D()</button>
       </div>
       <div id="about">
         Creative technologist with a passion for _<span id="output"></span>
         <br />
       </div>
     </div>
-    <div class="projects-container">
+    <div class="projects-container" id="projects-container">
       <div class="projects">
         <ins> Interactive Tools</ins>
         ○
         <br />
-        <a href="Projects/Interactive-Tools/Super-Formula-Sub-Divider/"
+        <a
+          id="superform"
+          href="Projects/Interactive-Tools/Super-Formula-Sub-Divider/"
           >SuperFormulaSubdivider
         </a>
         <br />
@@ -113,6 +110,10 @@
       </div>
     </div>
   </body>
+
+  <div id="threeD-scene">
+    <div id="css3d-layer"></div>
+  </div>
   <div class="footer">
     <p>© 2026 Bea Chatel</p>
   </div>
