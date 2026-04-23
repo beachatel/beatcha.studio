@@ -9,7 +9,7 @@
 *.mp4
 
 *.vscode
-
+*.DS_Store
 *node_modules/
 *All_Projects/
 */Users/bea/Documents/Personal/Code Projects/beachatel.studio/Projects/Ian-Pooley-Interstellar-Strut-Visualiser/Data/
