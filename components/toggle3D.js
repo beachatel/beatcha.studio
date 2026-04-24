@@ -99,7 +99,7 @@ class CSS3DRenderer {
 }
 
 async function loadData() {
-  const d = await fetch("projects.json").then((r) => r.json());
+  const d = await fetch("../projects.json").then((r) => r.json());
   PROJECTS = d.projects || [];
   IMAGES = d.images || [];
 }
