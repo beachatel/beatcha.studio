@@ -1,9 +1,19 @@
 {
+  "name": "beatcha.studio",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.0.10"
+  },
   "dependencies": {
-    "blueimp-load-image": "^5.16.0",
     "p5.fillgradient": "^0.2.0",
     "three": "^0.184.0",
-    "tweakpane": "^4.0.5",
-    "vite": "^8.0.10"
+    "tweakpane": "^4.0.5"
   }
 }

@@ -1,4 +1,4 @@
-import * as THREE from "https://cdn.skypack.dev/pin/three@v0.132.2-kGbzV3wutOXOnQfsA8YN/mode=imports/optimized/three";
+import * as THREE from "three";
 
 let phase = 0,
   ready = false,
