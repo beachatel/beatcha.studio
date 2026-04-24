@@ -332,7 +332,6 @@ window.toggle3D = async () => {
     tRY = 0;
     tunnelGroups.forEach((g) => g.panels.forEach((p) => (p._show = false)));
 
-    // Updates line color matching current theme dynamically
     edgeObjects.forEach((l) => {
       l.visible = false;
       l.material.color.setHex(isDark ? 0xf2f2f2 : 0x030405);
